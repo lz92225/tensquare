@@ -3,10 +3,11 @@ package com.tensquare.base.pojo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_label")
-public class Lable {
+public class Lable implements Serializable {
 
     @Id
     private String id;//
