@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>tensquare_base</artifactId>
+    <packaging>pom</packaging>
 
     <name>tensquare_base</name>
     <dependencies>

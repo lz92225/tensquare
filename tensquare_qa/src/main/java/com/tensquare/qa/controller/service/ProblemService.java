@@ -1,5 +1,6 @@
 package com.tensquare.qa.controller.service;
 
+import com.tensquare.qa.controller.pojo.Problem;
 import com.tensquare.qa.dao.ProblemDao;
 import com.tensquare.qa.pojo.Problem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ import java.util.Map;
  */
 @Service
 public class ProblemService {
+
+	@Autowired
+	private RedisTemplate redisTemplate;
 
 	@Autowired
 	private ProblemDao problemDao;
