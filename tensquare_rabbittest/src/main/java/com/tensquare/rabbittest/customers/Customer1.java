@@ -12,4 +12,8 @@ public class Customer1 {
     public void showMessage(String msg){
         System.out.println("queue_name消息内容："+msg);
     }
+
+
+
+
 }
