@@ -1,0 +1,10 @@
+server:
+  port: 9008
+
+spring:
+  application:
+    name: tensquatre-user
+  redis:
+    host: localhost
+  rabbitmq:
+    host: localhost

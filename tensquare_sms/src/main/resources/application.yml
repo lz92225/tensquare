@@ -1,0 +1,13 @@
+server:
+  port: 9009
+
+spring:
+  rabbitmq:
+    host: localhost
+
+aliyun:
+  sms:
+    accessKeyId: accessKeyId
+    accessKeySecret: accessKeySecret
+    template_code: template_code
+    sign_name: sign_name
