@@ -57,7 +57,7 @@ public class LableService {
                     Predicate predicate = criteriaBuilder.like(root.get("lablename").as(String.class), "%" + lable.getLabelname() + "%");
                     list.add(predicate);
                 }
-                if(lable.getFans()!=null && !"".equals(lable.getFans())){
+                if (lable.getFans() != null && !"".equals(lable.getFans())) {
                     Predicate predicate = criteriaBuilder.equal(root.get("fans").as(String.class), "='" + lable.getFans());
                     list.add(predicate);
                 }
@@ -69,16 +69,17 @@ public class LableService {
     }
 
     public Page<Lable> pageSearch(int page, int size, Lable lable) {
-        Pageable pageable = PageRequest.of(page-1,size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         return lableDao.findAll(new Specification<Lable>() {
             List<Predicate> list = new ArrayList<>();
+
             @Override
             public Predicate toPredicate(Root<Lable> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 if (lable.getLabelname() != null && !"".equals(lable.getLabelname())) {
                     Predicate predicate = criteriaBuilder.like(root.get("lablename").as(String.class), "%" + lable.getLabelname() + "%");
                     list.add(predicate);
                 }
-                if(lable.getFans()!=null && !"".equals(lable.getFans())){
+                if (lable.getFans() != null && !"".equals(lable.getFans())) {
                     Predicate predicate = criteriaBuilder.equal(root.get("fans").as(String.class), "='" + lable.getFans());
                     list.add(predicate);
                 }
@@ -86,7 +87,7 @@ public class LableService {
                 list.toArray(arr);
                 return criteriaBuilder.and(arr);
             }
-        },pageable);
+        }, pageable);
 
     }
 }
