@@ -1,52 +1,46 @@
 package com.tensquare.base.service;
 
-import com.tensquare.base.dao.LableDao;
+import com.tensquare.base.mapper.LableMapper;
 import com.tensquare.base.pojo.Lable;
-import entity.PageResult;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class LableService {
 
-    @Autowired
-    private LableDao lableDao;
+    @Resource
+    private LableMapper lableMapper;
 
     public List<Lable> findAll() {
-        return lableDao.findAll();
+        return lableMapper.findAll();
     }
 
     public Lable findById(String lableId) {
-        return lableDao.findById(lableId).get();
+        return lableMapper.findById(lableId);
     }
 
     public void add(Lable lable) {
         lable.setId(new IdWorker(1, 1).nextId() + "");
-        lableDao.save(lable);
+        lableMapper.save(lable);
     }
 
     public void update(Lable lable) {
-        lableDao.save(lable);
+        lableMapper.update1(lable);
     }
 
 
     public void delete(String lableId) {
-        lableDao.deleteById(lableId);
+        lableMapper.deleteById(lableId);
     }
 
-    public List<Lable> findSearch(Lable lable) {
+
+    /**
+     * spring data jpa分页查询，条件查询
+     */
+   /* public List<Lable> findSearch(Lable lable) {
         return lableDao.findAll(new Specification<Lable>() {
 
             List<Predicate> list = new ArrayList<>();
@@ -89,5 +83,5 @@ public class LableService {
             }
         }, pageable);
 
-    }
+    }*/
 }

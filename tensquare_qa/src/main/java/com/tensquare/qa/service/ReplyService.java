@@ -1,24 +1,17 @@
-package com.tensquare.qa.controller.service;
+package com.tensquare.qa.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 
-import com.tensquare.qa.controller.pojo.Reply;
+import com.tensquare.qa.pojo.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import util.IdWorker;
 
 import com.tensquare.qa.dao.ReplyDao;
+
+import javax.annotation.Resource;
 
 /**
  * 服务层
@@ -29,7 +22,7 @@ import com.tensquare.qa.dao.ReplyDao;
 @Service
 public class ReplyService {
 
-	@Autowired
+	@Resource
 	private ReplyDao replyDao;
 	
 	@Autowired
@@ -51,11 +44,11 @@ public class ReplyService {
 	 * @param size
 	 * @return
 	 */
-	public Page<Reply> findSearch(Map whereMap, int page, int size) {
-		Specification<Reply> specification = createSpecification(whereMap);
-		PageRequest pageRequest =  PageRequest.of(page-1, size);
-		return replyDao.findAll(specification, pageRequest);
-	}
+//	public Page<Reply> findSearch(Map whereMap, int page, int size) {
+////		Specification<Reply> specification = createSpecification(whereMap);
+////		PageRequest pageRequest =  PageRequest.of(page-1, size);
+//		return replyDao.findAll(specification, pageRequest);
+//	}
 
 	
 	/**
@@ -63,10 +56,10 @@ public class ReplyService {
 	 * @param whereMap
 	 * @return
 	 */
-	public List<Reply> findSearch(Map whereMap) {
-		Specification<Reply> specification = createSpecification(whereMap);
-		return replyDao.findAll(specification);
-	}
+//	public List<Reply> findSearch(Map whereMap) {
+////		Specification<Reply> specification = createSpecification(whereMap);
+//		return replyDao.findAll(specification);
+//	}
 
 	/**
 	 * 根据ID查询实体
@@ -74,7 +67,7 @@ public class ReplyService {
 	 * @return
 	 */
 	public Reply findById(String id) {
-		return replyDao.findById(id).get();
+		return replyDao.findById(id);
 	}
 
 	/**
@@ -91,7 +84,7 @@ public class ReplyService {
 	 * @param reply
 	 */
 	public void update(Reply reply) {
-		replyDao.save(reply);
+		replyDao.update(reply);
 	}
 
 	/**
@@ -107,7 +100,7 @@ public class ReplyService {
 	 * @param searchMap
 	 * @return
 	 */
-	private Specification<Reply> createSpecification(Map searchMap) {
+	/*private Specification<Reply> createSpecification(Map searchMap) {
 
 		return new Specification<Reply>() {
 
@@ -140,6 +133,6 @@ public class ReplyService {
 			}
 		};
 
-	}
+	}*/
 
 }

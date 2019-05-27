@@ -7,4 +7,9 @@ spring:
   redis:
     host: localhost
   rabbitmq:
-    host: localhost
+    host: localhostspring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tensquare_user?characterEncoding=utf-8
+    username: root
+    password: root

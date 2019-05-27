@@ -1,19 +1,13 @@
-package com.tensquare.qa.controller.pojo;
+package com.tensquare.qa.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 /**
  * 实体类
  * @author Administrator
  *
  */
-@Entity
-@Table(name="tb_reply")
 public class Reply implements Serializable{
 
-	@Id
 	private String id;//编号
 
 

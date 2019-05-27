@@ -9,6 +9,12 @@ spring:
     password: root
   application:
     name: tensquare_base
-  jpa:
-    database: mysql
-    show-sql: true
+#  jpa:
+#    database: mysql
+#    show-sql: true
+mybatis:
+  mapper-locations: mapper/*.xml
+
+logging:
+  level:
+    com.tensquare.base.mapper.*: debug

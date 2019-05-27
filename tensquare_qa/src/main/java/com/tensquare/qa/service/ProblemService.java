@@ -1,23 +1,17 @@
-package com.tensquare.qa.controller.service;
+package com.tensquare.qa.service;
 
-import com.tensquare.qa.controller.pojo.Problem;
 import com.tensquare.qa.dao.ProblemDao;
 import com.tensquare.qa.pojo.Problem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 服务层
@@ -31,7 +25,7 @@ public class ProblemService {
 	@Autowired
 	private RedisTemplate redisTemplate;
 
-	@Autowired
+	@Resource
 	private ProblemDao problemDao;
 	
 	@Autowired
@@ -68,11 +62,11 @@ public class ProblemService {
 	 * @param size
 	 * @return
 	 */
-	public Page<Problem> findSearch(Map whereMap, int page, int size) {
-		Specification<Problem> specification = createSpecification(whereMap);
-		PageRequest pageRequest =  PageRequest.of(page-1, size);
-		return problemDao.findAll(specification, pageRequest);
-	}
+//	public Page<Problem> findSearch(Map whereMap, int page, int size) {
+////		Specification<Problem> specification = createSpecification(whereMap);
+////		PageRequest pageRequest =  PageRequest.of(page-1, size);
+////		return problemDao.findAll();
+//	}
 
 	
 	/**
@@ -80,10 +74,10 @@ public class ProblemService {
 	 * @param whereMap
 	 * @return
 	 */
-	public List<Problem> findSearch(Map whereMap) {
-		Specification<Problem> specification = createSpecification(whereMap);
-		return problemDao.findAll(specification);
-	}
+//	public List<Problem> findSearch(Map whereMap) {
+//		Specification<Problem> specification = createSpecification(whereMap);
+//		return problemDao.findAll(specification);
+//	}
 
 	/**
 	 * 根据ID查询实体
@@ -91,7 +85,7 @@ public class ProblemService {
 	 * @return
 	 */
 	public Problem findById(String id) {
-		return problemDao.findById(id).get();
+		return problemDao.findById(id);
 	}
 
 	/**
@@ -108,7 +102,7 @@ public class ProblemService {
 	 * @param problem
 	 */
 	public void update(Problem problem) {
-		problemDao.save(problem);
+		problemDao.update(problem);
 	}
 
 	/**
@@ -124,7 +118,7 @@ public class ProblemService {
 	 * @param searchMap
 	 * @return
 	 */
-	private Specification<Problem> createSpecification(Map searchMap) {
+	/*private Specification<Problem> createSpecification(Map searchMap) {
 
 		return new Specification<Problem>() {
 
@@ -165,6 +159,6 @@ public class ProblemService {
 			}
 		};
 
-	}
+	}*/
 
 }
