@@ -4,16 +4,20 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/tensquare_base?characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/tensquare_base
     username: root
     password: root
   application:
     name: tensquare_base
+
+page:
+  size: 1
 #  jpa:
 #    database: mysql
 #    show-sql: true
 mybatis:
-  mapper-locations: mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: mybatis/mapper/*.xml
 
 logging:
   level:

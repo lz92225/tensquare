@@ -2,10 +2,13 @@ package com.tensquare.base.controller;
 
 import com.tensquare.base.pojo.Lable;
 import com.tensquare.base.service.LableService;
+import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -42,6 +45,13 @@ public class LableController {
     public Result deleteById(@PathVariable String lableId) {
         lableService.delete(lableId);
         return new Result(true, StatusCode.OK, "删除成功");
+    }
+
+    @RequestMapping(value = "/search/{page}/{size}", method = RequestMethod.POST)
+    public Result searchPage(@RequestBody Lable lable, @PathVariable int page, @PathVariable int size){
+        PageResult pageResult = new PageResult();
+        pageResult = lableService.searchPage(lable, page, size);
+        return new Result(true, StatusCode.OK, "分页查询成功",pageResult);
     }
 
     /*@RequestMapping(value = "/search", method = RequestMethod.POST)

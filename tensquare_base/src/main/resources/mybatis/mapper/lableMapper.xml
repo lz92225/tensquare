@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//com.order.test.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tensquare.base.mapper.LableMapper">
+
+
+    <sql id="getSqlByLabel">
+        <if test="labelname != null">
+            labelname = #{labelname}
+        </if>
+        <if test="state != null">
+            state = #{state}
+        </if>
+        <if test="count != null">
+            count = #{count}
+        </if>
+        <if test="recommend != null">
+            recommend = #{recommend}
+        </if>
+        <if test="fans != null">
+            fans = #{fans}
+        </if>
+    </sql>
+
+    <update id="update1" parameterType="lable">
+        update tb_label
+        <trim prefix="set" suffixOverrides=",">
+            <include refid="getSqlByLabel"/>
+            where id = #{id}
+        </trim>
+    </update>
+
+    <select id="searchPage" parameterType="lable" resultType="lable">
+        select * from tb_label
+        <where>
+           <include refid="getSqlByLabel"/>
+        </where>
+    </select>
+
+    <select id="searchPage2" parameterType="lable" resultType="lable">
+        select * from tb_label
+        <where>
+            <include refid="getSqlByLabel"/>
+        </where>
+    </select>
+</mapper>

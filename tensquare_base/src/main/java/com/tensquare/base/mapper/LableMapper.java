@@ -5,7 +5,6 @@ import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
-@Mapper
 public interface LableMapper {
     @Select("select * from tb_label")
     List<Lable> findAll();
@@ -20,4 +19,8 @@ public interface LableMapper {
     void deleteById(@Param("id") String lableId);
 
     void update1(Lable lable);
+
+    List<Lable> searchPage2(Lable lable);
+
+    List<Lable> searchPage(Lable lable);
 }
