@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//com.order.test.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tensquare.recruit.mapper.RecruitMapper">
+
+    <sql id="getSqlByRecruit">
+        <if test="jobname != null">
+            jobname = #{jobname}
+        </if>
+        <if test="salary != null">
+            salary = #{salary}
+        </if>
+        <if test="condition != null">
+            condition = #{condition}
+        </if>
+        <if test="education != null">
+            education = #{education}
+        </if>
+        <if test="type != null">
+            type = #{type}
+        </if>
+        <if test="address != null">
+            address = #{address}
+        </if>
+        <if test="eid != null">
+            eid = #{eid}
+        </if>
+        <if test="createtime != null">
+            createtime = #{createtime}
+        </if>
+        <if test="state != null">
+            state = #{state}
+        </if>
+        <if test="url != null">
+            url = #{url}
+        </if>
+        <if test="label != null">
+            label = #{label}
+        </if>
+        <if test="content1 != null">
+            content1 = #{content1}
+        </if>
+        <if test="content2 != null">
+            content2 = #{content2}
+        </if>
+    </sql>
+
+</mapper>

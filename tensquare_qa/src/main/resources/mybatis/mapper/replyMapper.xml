@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//com.order.test.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tensquare.qa.mapper.ReplyMapper">
+
+    <sql id="getSqlByReply">
+        <if test="problemid != null">
+            problemid = #{problemid}
+        </if>
+        <if test="content != null">
+            content = #{content}
+        </if>
+        <if test="createtime != null">
+            createtime = #{createtime}
+        </if>
+        <if test="updatetime != null">
+            updatetime = #{updatetime}
+        </if>
+        <if test="userid != null">
+            userid = #{userid}
+        </if>
+        <if test="nickname != null">
+            nickname = #{nickname}
+        </if>
+    </sql>
+
+</mapper>

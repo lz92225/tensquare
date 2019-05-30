@@ -4,12 +4,19 @@ server:
 spring:
   application:
     name: tensquatre-user
+
   redis:
     host: localhost
+
   rabbitmq:
-    host: localhostspring:
+    host: localhost
+
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/tensquare_user?characterEncoding=utf-8
     username: root
     password: root
+
+mybatis:
+  mapper-locations: mybatis/mapper/*.xml
+  config-location: classpath:mybatis/mybatis-config.xml

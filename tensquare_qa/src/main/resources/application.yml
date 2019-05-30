@@ -13,3 +13,7 @@ spring:
     show-sql: true
   redis:
     host: 127.0.0.1
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: mybatis/mapper/*.xml

@@ -1,30 +1,20 @@
 package com.tensquare.user.service;
 
-import com.tensquare.user.dao.UserDao;
-import com.tensquare.user.pojo.User;
+import com.tensquare.user.mapper.UserMapper;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import javax.annotation.Resource;
 
 @Service
 public class UserService {
 
-    @Autowired
-    private UserDao userDao;
+    @Resource
+    private UserMapper userMapper;
 
     @Autowired
     private RedisTemplate redisTemplate;
@@ -48,7 +38,7 @@ public class UserService {
         System.out.println("验证码：" + checkcode);
     }
 
-    public void add(User user) {
+    /*public void add(User user) {
         user.setId(idWorker.nextId() + "");
         userDao.save(user);
     }
@@ -84,5 +74,5 @@ public class UserService {
 
     public Page<User> pageSearch(int page, int size, User user) {
         return null;
-    }
+    }*/
 }

@@ -26,6 +26,7 @@ public class LableService {
     }
 
     public Lable findById(String lableId) {
+        System.out.println(2/0);
         return lableMapper.findById(lableId);
     }
 
@@ -44,17 +45,12 @@ public class LableService {
     }
 
     public PageResult<Lable> searchPage(Lable lable, int page, int size) {
-        PageHelper.startPage(page,size);
+        PageHelper.startPage(page, size);
         PageResult<Lable> pageResult = new PageResult<>();
-        try {
-            List<Lable> list = lableMapper.searchPage(lable);
-            pageResult.setRows(list);
-            //利用pagehelper自带的pageinfo对象获取总数
-            pageResult.setTotal(new PageInfo<>(list).getTotal());
-            return pageResult;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        List<Lable> list = lableMapper.searchPage(lable);
+        pageResult.setRows(list);
+        //利用pagehelper自带的pageinfo对象获取总数
+        pageResult.setTotal(new PageInfo<>(list).getTotal());
         return pageResult;
     }
 

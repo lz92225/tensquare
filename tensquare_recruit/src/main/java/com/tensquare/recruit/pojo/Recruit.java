@@ -1,19 +1,13 @@
 package com.tensquare.recruit.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.io.Serializable;
 /**
  * 实体类
  * @author Administrator
  *
  */
-@Entity
-@Table(name="tb_recruit")
 public class Recruit implements Serializable{
 
-	@Id
 	private String id;//ID
 
 	private String jobname;//职位名称
