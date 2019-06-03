@@ -51,4 +51,8 @@
         </if>
     </sql>
 
+    <insert id="addUser" parameterType="user">
+        insert into tb_user(id, nickname, mobile, password)
+        values(#{id},#{nickname},#{mobile},#{password})
+    </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package com.tensquare.user.controller;
 
+import com.tensquare.user.client.QaClient;
+import com.tensquare.user.pojo.User;
 import com.tensquare.user.service.UserService;
 import entity.Result;
 import entity.StatusCode;
@@ -7,9 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import util.JwtUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -20,12 +27,39 @@ public class UserController {
 
     @Autowired
     private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private QaClient qaClient;
+
+    @Autowired
+    private JwtUtil jwtUtil;
+    /**
+     * 查看所有问题
+     */
+    @RequestMapping(method = RequestMethod.GET)
+    public Result findAllProblem(){
+        return qaClient.findAll();
+    }
+    /**
+     * 登陆 生成token
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public Result login(@RequestBody User user){
+        user = userService.login(user);
+        String token = jwtUtil.createJWT(user.getId(), user.getNickname(), "user");
+        Map<String, Object> map = new HashMap();
+        map.put("token", token);
+        map.put("roles", "user");
+        return new Result(true, StatusCode.OK, "登陆成功", map);
+    }
     /**
      * 生成验证码
      * @param mobile
      * @return
      */
-    @RequestMapping(value = "/sendsms/{mobile}", method = RequestMethod.POST)
+    @RequestMapping(value = "/sendsms/{mobile}", method = RequestMethod.GET)
     public Result sendsms(@PathVariable String mobile){
         userService.sendsms(mobile);
         return new Result(true, StatusCode.OK, "注册成功");
@@ -35,20 +69,22 @@ public class UserController {
      * 注册
      * @return
      */
-//    @RequestMapping(value = "/register/{code}",method = RequestMethod.POST)
-//    public Result register(@PathVariable String code, @RequestBody User user){
-//        String checkcode = (String) redisTemplate.opsForValue().get("checkcode_" + user.getMobile());
-//        if(checkcode.isEmpty()){
-//            return new Result(false, StatusCode.ERROR,"请获取验证码");
-//        }
-//        if(!checkcode.equals(code)){
-//            return new Result(false, StatusCode.ERROR,"请输入正确的验证码");
-//        }
-//        //密码加密
-//        user.setPassword(encoder.encode(user.getPassword()));
-//        userService.add(user);
-//        return new Result(true, StatusCode.OK, "注册成功");
-//    }
+    @RequestMapping(value = "/register/{code}",method = RequestMethod.POST)
+    public Result register(@PathVariable String code, @RequestBody User user){
+        String checkcode = (String) redisTemplate.opsForValue().get("checkcode_" + user.getMobile());
+        System.out.println(checkcode);
+        System.out.println(code);
+        if(checkcode == null || checkcode.length() == 0){
+            return new Result(false, StatusCode.ERROR,"请获取验证码");
+        }
+        if(!checkcode.equals(code)){
+            return new Result(false, StatusCode.ERROR,"请输入正确的验证码");
+        }
+        //密码加密
+        user.setPassword(encoder.encode(user.getPassword()));
+        userService.add(user);
+        return new Result(true, StatusCode.OK, "注册成功");
+    }
 //
 //    @RequestMapping(method = RequestMethod.GET)
 //    public Result findAll() {

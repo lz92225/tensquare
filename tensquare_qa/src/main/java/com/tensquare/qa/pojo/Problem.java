@@ -11,9 +11,6 @@ import java.util.Date;
 public class Problem implements Serializable{
 
 	private String id;//ID
-
-
-	
 	private String title;//标题
 	private String content;//内容
 	private Date createtime;//创建日期

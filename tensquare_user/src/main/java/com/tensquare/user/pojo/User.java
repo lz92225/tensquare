@@ -1,5 +1,6 @@
 package com.tensquare.user.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User {
@@ -23,24 +24,6 @@ public class User {
 
     public User() {
     }
-
-//    public User(String nickname, String mobile, String sex, String password, Date birthday, String avatar, String email, Date regdate, Date updatedate, Date lastdate, long online, String interest, String personality, int fanscount, int followcount) {
-//        this.nickname = nickname;
-//        this.mobile = mobile;
-//        this.sex = sex;
-//        this.password = password;
-//        this.birthday = birthday;
-//        this.avatar = avatar;
-//        this.email = email;
-//        this.regdate = regdate;
-//        this.updatedate = updatedate;
-//        this.lastdate = lastdate;
-//        this.online = online;
-//        this.interest = interest;
-//        this.personality = personality;
-//        this.fanscount = fanscount;
-//        this.followcount = followcount;
-//    }
 
     public String getId() {
         return id;
@@ -111,6 +94,9 @@ public class User {
     }
 
     public void setRegdate(Date regdate) {
+        if(regdate == null){
+            this.regdate = new Date();
+        }
         this.regdate = regdate;
     }
 
@@ -119,6 +105,9 @@ public class User {
     }
 
     public void setUpdatedate(Date updatedate) {
+        if(updatedate == null){
+            this.regdate = new Date();
+        }
         this.updatedate = updatedate;
     }
 
@@ -127,6 +116,9 @@ public class User {
     }
 
     public void setLastdate(Date lastdate) {
+        if(lastdate == null){
+            this.regdate = new Date();
+        }
         this.lastdate = lastdate;
     }
 

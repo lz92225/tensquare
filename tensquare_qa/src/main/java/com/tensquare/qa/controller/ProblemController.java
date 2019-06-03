@@ -1,4 +1,5 @@
 package com.tensquare.qa.controller;
+import com.tensquare.qa.client.LableClient;
 import com.tensquare.qa.pojo.Problem;
 import com.tensquare.qa.service.ProblemService;
 import entity.Result;
@@ -21,6 +22,14 @@ public class ProblemController {
 	@Autowired
 	private ProblemService problemService;
 
+	@Autowired
+	private LableClient lableClient;
+
+	@RequestMapping(value = "/lable/{lableId}", method = RequestMethod.GET)
+	public Result findLableById(@PathVariable("lableId") String lableId){
+		return lableClient.findById(lableId);
+	}
+
 	@RequestMapping(value = "/newlist/{labelid}/{page}/{size}", method = RequestMethod.GET)
 	public Result newlist(@PathVariable String labelid, @PathVariable int page, @PathVariable int size){
 		return new Result(true, StatusCode.OK, "查询成功");
@@ -42,7 +51,7 @@ public class ProblemController {
 	 */
 	@RequestMapping(method= RequestMethod.GET)
 	public Result findAll(){
-		return new Result(true,StatusCode.OK,"查询成功");
+		return new Result(true,StatusCode.OK,"查询成功", problemService.findAll());
 	}
 	
 	/**
@@ -84,6 +93,7 @@ public class ProblemController {
 	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public Result add(@RequestBody Problem problem  ){
+		problemService.addProblem(problem);
 		return new Result(true,StatusCode.OK,"增加成功");
 	}
 	

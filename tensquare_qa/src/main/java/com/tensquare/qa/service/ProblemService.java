@@ -1,9 +1,13 @@
 package com.tensquare.qa.service;
 
+import com.tensquare.qa.mapper.ProblemMapper;
+import com.tensquare.qa.pojo.Problem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
+
+import java.util.List;
 
 /**
  * 服务层
@@ -21,8 +25,20 @@ public class ProblemService {
 	@Autowired
 	private IdWorker idWorker;
 
+	@Autowired
+	private ProblemMapper problemMapper;
 
-	/**
+    public void addProblem(Problem problem) {
+    	problem.setId(idWorker.nextId()+"");
+    	problemMapper.addProblem(problem);
+    }
+
+    public List<Problem> findAll() {
+    	return problemMapper.findAll();
+    }
+
+
+    /**
 	 * 查询全部列表
 	 * @return
 	 */

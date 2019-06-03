@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: tensquatre-user
+    name: tensquare-user
 
   redis:
     host: localhost
@@ -20,3 +20,27 @@ spring:
 mybatis:
   mapper-locations: mybatis/mapper/*.xml
   config-location: classpath:mybatis/mybatis-config.xml
+
+jwt:
+  config:
+    key: liuzhangtest
+    ttl: 3600000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true
+
+
+#zuul:
+#  routes:
+#    tensquare-base:
+#      path: /base/**
+#      serviceId: tensquare-base
+
+#熔断器
+feign:
+  hystrix:
+    enabled: true

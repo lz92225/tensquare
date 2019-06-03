@@ -26,7 +26,6 @@ public class LableService {
     }
 
     public Lable findById(String lableId) {
-        System.out.println(2/0);
         return lableMapper.findById(lableId);
     }
 

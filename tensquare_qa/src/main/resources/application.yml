@@ -11,9 +11,14 @@ spring:
   jpa: 
     database: MySQL
     show-sql: true
-  redis:
-    host: 127.0.0.1
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: mybatis/mapper/*.xml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true

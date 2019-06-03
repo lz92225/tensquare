@@ -11,3 +11,10 @@ aliyun:
     accessKeySecret: accessKeySecret
     template_code: template_code
     sign_name: sign_name
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true

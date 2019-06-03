@@ -16,7 +16,10 @@
         <module>tensquare_rabbittest</module>
         <module>tensquare_user</module>
         <module>tensquare_sms</module>
-        <module>tensquare_mybatistest</module>
+        <module>tensquare_eurake</module>
+        <module>tensquare_friend</module>
+        <module>tensquare_manager</module>
+        <module>tensquare_web</module>
     </modules>
 
     <name>tensquare_parent</name>
@@ -27,7 +30,17 @@
         <version>2.0.1.RELEASE</version>
         <relativePath/>
     </parent>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.M9</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -46,27 +59,27 @@
         </dependency>
     </dependencies>
 
-   <!-- <repositories>
-        <repository>
-            <id>spring-snapshots</id>
-            <name>Spring Snapshots</name>
-            <url>https://repo.spring.io/snapshot</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>-->
+     <repositories>
+         <repository>
+             <id>spring-snapshots</id>
+             <name>Spring Snapshots</name>
+             <url>https://repo.spring.io/snapshot</url>
+             <snapshots>
+                 <enabled>true</enabled>
+             </snapshots>
+         </repository>
+         <repository>
+             <id>spring-milestones</id>
+             <name>Spring Milestones</name>
+             <url>https://repo.spring.io/milestone</url>
+             <snapshots>
+                 <enabled>false</enabled>
+             </snapshots>
+         </repository>
+     </repositories>
 
-    <!--<pluginRepositories>
-        &lt;!&ndash;<pluginRepository>
+    <pluginRepositories>
+        <pluginRepository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
@@ -81,7 +94,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository>&ndash;&gt;
-    </pluginRepositories>-->
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>

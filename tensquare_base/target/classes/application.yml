@@ -8,7 +8,7 @@ spring:
     username: root
     password: root
   application:
-    name: tensquare_base
+    name: tensquare-base
 
 page:
   size: 1
@@ -22,3 +22,10 @@ mybatis:
 logging:
   level:
     com.tensquare.base.mapper.*: debug
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true
