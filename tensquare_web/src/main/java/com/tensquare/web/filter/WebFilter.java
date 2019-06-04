@@ -1,10 +1,9 @@
-package com.tensquare.manager.filter;
+package com.tensquare.web.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import io.jsonwebtoken.Claims;
-import org.apache.http.protocol.RequestContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import util.JwtUtil;
@@ -12,7 +11,7 @@ import util.JwtUtil;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
-public class ManagerFilter extends ZuulFilter {
+public class WebFilter extends ZuulFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -77,7 +76,7 @@ public class ManagerFilter extends ZuulFilter {
                 try {
                     Claims claims = jwtUtil.parseJWT(token);
                     String roles = (String) claims.get("roles");
-                    if (roles != null && roles.equals("admin")) {
+                    if (roles != null && roles.equals("user")) {
                         requestContext.addZuulRequestHeader("Authorization", header);
                         return null;
                     }

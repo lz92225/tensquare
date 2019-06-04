@@ -1,9 +1,9 @@
 package com.tensquare.user.mapper;
 
 import com.tensquare.user.pojo.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface UserMapper {
 
@@ -11,4 +11,7 @@ public interface UserMapper {
     User login(String nickname);
 
     void addUser(User user);
+
+    @Select("select nickname, mobile, birthday from tb_user")
+    List<User> findAll();
 }

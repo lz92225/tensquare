@@ -36,7 +36,7 @@ public class UserController {
     /**
      * 查看所有问题
      */
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/problem", method = RequestMethod.GET)
     public Result findAllProblem(){
         return qaClient.findAll();
     }
@@ -86,10 +86,10 @@ public class UserController {
         return new Result(true, StatusCode.OK, "注册成功");
     }
 //
-//    @RequestMapping(method = RequestMethod.GET)
-//    public Result findAll() {
-//        return new Result(true, StatusCode.OK, "查询成功", userService.findAll());
-//    }
+    @RequestMapping(method = RequestMethod.GET)
+    public Result findAll() {
+        return new Result(true, StatusCode.OK, "查询成功", userService.findAll());
+    }
 //
 //    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
 //    public Result findById(@PathVariable String userId) {

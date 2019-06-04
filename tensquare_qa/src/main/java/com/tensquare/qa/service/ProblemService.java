@@ -2,11 +2,13 @@ package com.tensquare.qa.service;
 
 import com.tensquare.qa.mapper.ProblemMapper;
 import com.tensquare.qa.pojo.Problem;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -28,13 +30,24 @@ public class ProblemService {
 	@Autowired
 	private ProblemMapper problemMapper;
 
+	@Autowired
+	private HttpServletRequest request;
+
     public void addProblem(Problem problem) {
     	problem.setId(idWorker.nextId()+"");
     	problemMapper.addProblem(problem);
     }
 
     public List<Problem> findAll() {
-    	return problemMapper.findAll();
+		Claims claims = (Claims) request.getAttribute("claims_user");
+		if (claims == null) {
+			throw new RuntimeException("权限不足，请先登陆后再查询！");
+		}
+		String roles = (String) claims.get("roles");
+		if (!"user".equals(roles)) {
+			throw new RuntimeException("权限不足，请先登陆后再查询！");
+		}
+		return problemMapper.findAll();
     }
 
 

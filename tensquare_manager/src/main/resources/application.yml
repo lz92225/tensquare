@@ -26,3 +26,9 @@ zuul:
     tensquare_recruit:
       path: /recruit/**
       serviceId: tensquare-recruit
+
+
+jwt:
+  config:
+    key: liuzhangtest
+    ttl: 60000

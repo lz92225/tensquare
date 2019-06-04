@@ -1,0 +1,8 @@
+#配置中心
+spring:
+  cloud:
+    config:
+      name: base
+      profile: dev
+      label: master
+      uri: http://localhost:12000

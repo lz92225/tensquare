@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QaClientImpl implements QaClient {
+
     @Override
     public Result findAll() {
         System.out.println("qa微服务关闭或网络出错！");
