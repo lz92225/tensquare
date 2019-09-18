@@ -2,7 +2,7 @@
 spring:
   cloud:
     config:
-      name: base
+      name: qa
       profile: dev
       label: master
       uri: http://localhost:12000

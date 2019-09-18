@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.tensquare.base.mapper.LableMapper;
 import com.tensquare.base.pojo.Lable;
 import entity.PageResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +22,9 @@ public class LableService {
     private String size;
     @Resource
     private LableMapper lableMapper;
+
+    @Autowired
+    private IdWorker idWorker;
 
     public List<Lable> findAll() {
         return lableMapper.findAll();
@@ -53,6 +58,63 @@ public class LableService {
         return pageResult;
     }
 
+    public List<Lable> test_propagation() {
+        Lable lable = new Lable();
+        lable.setId(idWorker.nextId()+"");
+        lable.setLabelname("test_propagation");
+        lable.setCount(22L);
+        lable.setState("2");
+        lable.setFans(22L);
+        lable.setRecommend("2");
+        lableMapper.save(lable);
+        List<Lable> list = lableMapper.findAll();
+        return list;
+    }
+
+
+    public void batchInsert(){
+        Lable lable = new Lable();
+        ArrayList<Lable> list = new ArrayList<>();
+        lable.setState("2");
+        lable.setRecommend("2");
+        long starttime = System.currentTimeMillis();
+        for (int i = 0; i < 3000000; i++) {
+            System.out.println("第"+(i+1)+"条数据！");
+            lable.setId(System.currentTimeMillis()+""+i);
+            lable.setLabelname("test_propagation"+i);
+            lable.setCount(22L+i);
+            lable.setFans(22L+i);
+            list.add(lable);
+            if((i+1)%30==0){
+                lableMapper.batchAdd(list);
+                list.clear();
+            }
+        }
+//        lableMapper.batchAdd(list);
+        long endtime = System.currentTimeMillis();
+        System.out.println("花费时间："+(endtime-starttime));
+//        try {
+//            new Thread().sleep(3000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        Lable lable1 = new Lable();
+//        ArrayList<Lable> list1 = new ArrayList<>();
+//        lable1.setState("2");
+//        lable1.setRecommend("2");
+//        long starttime1 = System.currentTimeMillis();
+//        for (int i = 0; i < 300; i++) {
+//            System.out.println("第"+(i+1)+"条数据！");
+//            lable1.setId(System.currentTimeMillis()+""+i);
+//            lable1.setLabelname("test_propagation"+i);
+//            lable1.setCount(22L+i);
+//            lable1.setFans(22L+i);
+//            list.add(lable1);
+//            lableMapper.save(lable1);
+//        }
+//        long endtime1 = System.currentTimeMillis();
+//        System.out.println("花费时间："+(endtime1-starttime1));
+    }
 
     /**
      * spring data jpa分页查询，条件查询

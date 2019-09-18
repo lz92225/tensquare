@@ -85,6 +85,10 @@ public class UserService {
         return userMapper.findAll();
     }
 
+    public User selectByNickname(String nickname) {
+        return userMapper.selectByNickname(nickname);
+    }
+
     /*public void add(User user) {
         user.setId(idWorker.nextId() + "");
         userDao.save(user);

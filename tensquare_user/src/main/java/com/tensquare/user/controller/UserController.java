@@ -49,6 +49,8 @@ public class UserController {
     public Result login(@RequestBody User user){
         user = userService.login(user);
         String token = jwtUtil.createJWT(user.getId(), user.getNickname(), "user");
+        //缓存存放token以及过期时间（一个小时）
+        redisTemplate.opsForValue().set(token,System.currentTimeMillis()+60000);
         Map<String, Object> map = new HashMap();
         map.put("token", token);
         map.put("roles", "user");
@@ -89,6 +91,12 @@ public class UserController {
     @RequestMapping(method = RequestMethod.GET)
     public Result findAll() {
         return new Result(true, StatusCode.OK, "查询成功", userService.findAll());
+    }
+
+    @RequestMapping(value = "/nickname/{nickname}", method = RequestMethod.GET)
+    public Result selectUser(@PathVariable String nickname){
+        User user = userService.selectByNickname(nickname);
+        return new Result(true, StatusCode.OK, "查询成功", user);
     }
 //
 //    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)

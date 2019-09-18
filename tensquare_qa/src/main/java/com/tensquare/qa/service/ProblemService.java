@@ -6,6 +6,8 @@ import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +40,7 @@ public class ProblemService {
     	problemMapper.addProblem(problem);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<Problem> findAll() {
 		Claims claims = (Claims) request.getAttribute("claims_user");
 		if (claims == null) {

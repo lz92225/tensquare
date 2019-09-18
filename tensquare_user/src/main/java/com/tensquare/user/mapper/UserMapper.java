@@ -14,4 +14,7 @@ public interface UserMapper {
 
     @Select("select nickname, mobile, birthday from tb_user")
     List<User> findAll();
+
+    @Select("select * from tb_user where nickname = ${nickname}")
+    User selectByNickname(String nickname);
 }

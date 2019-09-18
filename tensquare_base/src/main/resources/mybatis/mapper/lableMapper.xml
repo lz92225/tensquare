@@ -43,4 +43,12 @@
             <include refid="getSqlByLabel"/>
         </where>
     </select>
+
+    <insert id="batchAdd">
+        insert into tb_label(id,labelname,state,count,recommend,fans)
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.labelname},#{item.state},#{item.count}, #{item.recommend},#{item.fans})
+        </foreach>
+    </insert>
 </mapper>

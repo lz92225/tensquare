@@ -11,7 +11,7 @@ import util.JwtUtil;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
-public class WebFilter extends ZuulFilter {
+public class WebFilter extends ZuulFilter  {
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -57,6 +57,7 @@ public class WebFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
         System.out.println("经过web网关过滤器！");
+
         //上下文
         RequestContext requestContext = RequestContext.getCurrentContext();
         //request作用域

@@ -54,6 +54,12 @@ public class LableController {
         return new Result(true, StatusCode.OK, "分页查询成功",pageResult);
     }
 
+    @RequestMapping(value = "/batchAdd", method = RequestMethod.GET)
+    public Result batchAdd() {
+        lableService.batchInsert();
+        return new Result(true, StatusCode.OK, "添加成功");
+    }
+
     /*@RequestMapping(value = "/search", method = RequestMethod.POST)
     public Result findSearch(@RequestBody Lable lable) {
         List<Lable> list = lableService.findSearch(lable);
@@ -65,4 +71,12 @@ public class LableController {
         Page<Lable> p = lableService.pageSearch(page, size, lable);
         return new Result(true, StatusCode.OK, "查询成功", new PageResult<Lable>(p.getTotalElements(), p.getContent()));
     }*/
+
+
+    @RequestMapping(value = "/test_propagation", method = RequestMethod.GET)
+    public Result test_propagation() {
+        List<Lable> list = lableService.test_propagation();
+        System.out.println(list);
+        return new Result(true, StatusCode.OK, "查询成功", list);
+    }
 }
